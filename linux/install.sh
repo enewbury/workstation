@@ -14,7 +14,7 @@ rm /tmp/op.zip
 
 eval(`op signin my.1password.com`)
 
-git clone git@github.com:enewbury/dotfiles.git ~/src/github.com/enewbury/workstation_setup
+git clone git@github.com:enewbury/workstation.git ~/src/github.com/enewbury/workstation
 
 ansible-galaxy -r ~/src/github.com/enewbury/dotfiles/linux/ansible/requirements.yml install
 ansible-playbook -c local -K ~/src/github.com/enewbury/dotfiles/linux/ansible/setup.yml
