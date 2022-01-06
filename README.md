@@ -1,33 +1,30 @@
-# @enewbury has dotfiles
+# Workstation setup for Linux and Mac
 
-TODO
-- [ ] Update the readme
-- [ ] Separate out dotfiles to separate repo (dotfiles, mac_setup, linux_setup, cloud_setup)
+This serves as my "Source of Truth" for the configuration of my workstation computers.  I can mess around with them as much as I like, but anything I want to save permanantly goes in this repo.
 
-## install
-    
-    /usr/bin/env bash \
-        <(curl -fsSL https://raw.githubusercontent.com/enewbury/dotfiles/latest/script/install)
+## Setting up a new linux install
 
-This will clone this repo to `~/src/github.com/enewbury` and execute [`script/setup`](script/setup). The path matches conventions from [`ghq`][ghq], which I use to manage all my local projects.
+1. Install ansible using whatever package manager runs on the distro
+2. Run the setup script which
+    - Installs `op`, the 1Password command line tool
+    - runs the one password login which should prompt you for input
+    - clones the workstation git repository to the machine's src directory
+    - installs ansible galaxy dependencies
+    - runs the playbook
+3. Log in and and out after running the script, then enable the gnome extensions
+4. Install any themes or icons you like!
 
-### Next steps
+Example on debian
+```
+sudo apt update
+sudo apt install ansible
+curl https://raw.githubusercontent.com/enewbury/workstation/main/linux/install.sh | bash
+```
 
-I keep a log of [install issues][install-issues] and potential improvements when
-I have the opportunity to run a _clean_ install.
-
-- 2021-06-29: MacBook Pro, macOS 11.4
-
-## Tooling
-
-- [rossmacarthur/sheldon: A fast, configurable, shell plugin manager](https://github.com/rossmacarthur/sheldon)
-- [Starship: Cross-Shell Prompt](https://starship.rs/)
-- [thoughtbot/rcm: rc file (dotfile) management](https://github.com/thoughtbot/rcm)
-- [hlissner/doom-emacs: An Emacs framework for the stubborn martian hacker](https://github.com/hlissner/doom-emacs)
-- [asdf - An extendable version manager](https://asdf-vm.com)
-- [x-motemen/ghq: Remote repository management made easy][ghq]
-- [Homebrew: The Missing Package Manager for macOS (or Linux)](https://brew.sh)
-
-
-[install-issues]: https://github.com/enewbury/dotfiles/labels/install
-[ghq]: https://github.com/x-motemen/ghq
+## Features
+- RCM for dotfiles
+- Asdf with elixir, erlang, node, and ghq
+- Auto gpg import
+- Auto ssh key setup
+- Setup of terminal themes
+- Custom keyboard shortcuts and gnome settings
