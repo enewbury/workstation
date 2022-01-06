@@ -2,7 +2,7 @@
 VERSION=op_linux_386_v1.12.3
 # Install op
 curl "https://cache.agilebits.com/dist/1P/op/pkg/v1.12.3/$VERSION.zip" >> /tmp/op.zip
-unzip /tmp/op.zip -o -d /tmp/$VERSION/
+unzip /tmp/op.zip -d /tmp/$VERSION/
 
 gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 gpg --verify /tmp/$VERSION/op.sig /tmp/$VERSION/op
