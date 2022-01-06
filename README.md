@@ -28,3 +28,7 @@ curl https://raw.githubusercontent.com/enewbury/workstation/main/linux/install.s
 - Auto ssh key setup
 - Setup of terminal themes
 - Custom keyboard shortcuts and gnome settings
+
+
+## Mac
+Includes some legacy bash scripts for setting up Mac OS
