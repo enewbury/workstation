@@ -5,7 +5,7 @@ curl "https://cache.agilebits.com/dist/1P/op/pkg/v1.12.3/$VERSION.zip" >> /tmp/o
 unzip /tmp/op.zip -o -d /tmp/$VERSION/
 
 gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
-gpg --verify /tmp/$VERSTION/op.sig /tmp/$VERSION/op
+gpg --verify /tmp/$VERSION/op.sig /tmp/$VERSION/op
 
 mv /tmp/$VERSION/op /usr/local/bin/
 
