@@ -1,0 +1,72 @@
+[core]
+  excludesfile = ~/.gitignore
+  quotepath = false
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[color]
+  ui = true
+  pager = true
+  interactive = auto
+  diff = auto
+  status = auto
+  branch = auto
+
+[merge]
+  tool = opendiff
+
+[mergetool]
+  keepBackup = false
+
+[alias]
+  co                = checkout
+  amend             = commit --amend --no-edit
+  count             = !git shortlog -sn
+  assume            = update-index --assume-unchanged
+  unassume          = update-index --no-assume-unchanged
+  assumed           = "!git ls-files -v | grep ^h | cut -c 3-"
+  st                = status
+  promote           = !$DOT/bin/git-promote
+  wtf               = !$DOT/bin/git-wtf
+  rank-contributers = !$DOT/bin/git-rank-contributers
+  undo              = !$DOT/bin/git-undo
+  ec                = config --global -e
+  bs                = !git checkout $(git branch | cut -c 3- | fzy)
+  browse            = !gh repo view --web
+  pr                = !gh pr create --web
+
+[branch]
+  autosetuprebase = always
+
+[pull]
+  rebase = true
+
+[push]
+  default = simple
+
+[credential]
+  helper = osxkeychain
+
+[commit]
+  gpgsign = false
+
+[rebase]
+  autoStash = true
+
+[rerere]
+  enabled = true
+
+[hub]
+  protocol = https
+
+[init]
+  templateDir = ~/.git-template
+
+[include]
+  # keep your user name and 3rd-party config in a more private file
+  path = ~/.local/gitconfig
+
+[ghq]
+  root = ~/src

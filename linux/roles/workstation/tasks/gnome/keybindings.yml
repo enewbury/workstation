@@ -1,0 +1,62 @@
+- name: gnome | keybindings | file browser shortcut
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/home"
+    value: "['<Super>f']"
+
+- name: gnome | keybindings | web browser shortcut
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/www"
+    value: "['<Super>b']"
+
+- name: gnome | keybindings | email shortcut
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/email"
+    value: "['<Super>e']"
+
+- name: gnome | keybindings | set terminal keybinding
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name",
+        value: "'terminal'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding",
+        value: "'<Super>t'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command",
+        value: "'{{ terminal_emulator }}'",
+      }
+
+- name: gnome | keybindings | set text editor keybinding
+  tags: gnome,keybindings
+  become_user: jay
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name",
+        value: "'text editor'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding",
+        value: "'<Super>c'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command",
+        value: "'{{ gui_editor }}'",
+      }
+
+- name: enable custom keybindings
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
+
+- name: gnome | keybindings | map capslock to control
+  dconf:
+    key: "/org/gnome/desktop/input-sources/xkb-options"
+    value: "['caps:escape']"

@@ -1,0 +1,9 @@
+# sheldon artifacts
+sheldon/repos
+sheldon/plugins.lock
+
+# bundler
+bundle/cache
+
+# symlink to private files
+local

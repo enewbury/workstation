@@ -1,0 +1,64 @@
+- name: dotfiles | ensure github.com is a known host
+  lineinfile:
+    dest: ~/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+
+- name: dotfiles | clone dotfiles
+  git:
+    repo: git@github.com:enewbury/dotfiles.git
+    dest: "{{ dotfiles_dir }}"
+    update: false
+    version: "latest"
+
+- name: dotfiles | clone tpm
+  git:
+    repo: https://github.com/tmux-plugins/tpm.git
+    dest: ~/.tmux/plugins/tpm
+    depth: 1
+    version: v3.0.0
+
+- name: dotfiles | lookup local fish config
+  onepassword_info:
+    search_terms: "local.fish"
+  register: local_fish_info
+
+- name: dotfiles | copy local fish config
+  copy:
+    content: "{{ local_fish_info['onepassword']['local.fish']['document'] }}"
+    dest: ~/.local/local.fish
+    mode: 0644
+
+- name: dotfiles | lookup local git config
+  onepassword_info:
+    search_terms: "gitconfig.local"
+  register: local_git_info
+
+- name: dotfiles | copy local git config
+  copy:
+    content: "{{ local_git_info['onepassword']['gitconfig.local']['document'] }}"
+    dest: ~/.local/gitconfig
+    mode: 0644
+
+- name: dotfiles | lookup hex config
+  onepassword_info:
+    search_terms: "hex.config"
+  register: hex_config_info
+
+- name: dotfiles | ensure hex directory exists
+  file:
+    path: ~/.hex
+    state: directory
+    mode: 0755
+
+- name: dotfiles | copy hex config
+  copy:
+    content: "{{ hex_config_info['onepassword']['hex.config']['document'] }}"
+    dest: ~/.hex/hex.config
+    mode: 0644
+
+- name: dotfiles | setup dotfiles
+  command: rcup -d {{ dotfiles_dir  }}
+  changed_when: false

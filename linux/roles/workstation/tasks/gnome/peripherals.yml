@@ -1,0 +1,19 @@
+- name: gnome | peripherals | increase cursor speed (mouse)
+  dconf:
+    key: "/org/gnome/desktop/peripherals/mouse/speed"
+    value: "-0.36760000000000000"
+
+- name: gnome | peripherals | enable cursor acceleration (mouse)
+  dconf:
+    key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
+    value: "'adaptive'"
+
+- name: gnome | peripherals | increase cursor speed (touchpad)
+  dconf:
+    key: "/org/gnome/desktop/peripherals/touchpad/speed"
+    value: "0.10294100000000000"
+
+- name: gnome | peripherals | increase cursor speed (touchpad)
+  dconf:
+    key: "/org/gnome/desktop/peripherals/keyboard/delay"
+    value: "uint32 319"

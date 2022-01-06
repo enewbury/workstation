@@ -1,0 +1,36 @@
+- name: gnome | terminal | disable terminal menubar
+  tags: terminal
+  dconf:
+    key: "/org/gnome/terminal/legacy/default-show-menubar"
+    value: "false"
+
+- name: gnome | terminal | set terminal configuration
+  tags: terminal
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { key: audible-bell, value: "false" }
+    - { key: background-color, value: "'rgb(40,41,43)'" }
+    - { key: background-transparency-percent, value: "3" }
+    - { key: bold-color, value: "'#D8DEE9'" }
+    - { key: bold-color-same-as-fg, value: "true" }
+    - { key: cursor-background-color, value: "'rgb(216,222,233)'" }
+    - { key: cursor-colors-set, value: "true" }
+    - { key: cursor-foreground-color, value: "'rgb(59,66,82)'" }
+    - { key: default-size-columns, value: "100" }
+    - { key: font, value: "'FuraCode Nerd Font Mono 12'" }
+    - { key: foreground-color, value: "'rgb(181,188,201)'" }
+    - { key: highlight-background-color, value: "'rgb(136,192,208)'" }
+    - { key: highlight-colors-set, value: "true" }
+    - { key: highlight-foreground-color, value: "'rgb(46,52,64)'" }
+    - { key: nord-gnome-terminal-version, value: "'0.1.0'" }
+    - { key: palette, value: "['#3B4252', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#88C0D0', '#E5E9F0', '#4C566A', '#BF616A', '#A3BE8 ', '#EBCB8B', '#81A1C1', '#B48EAD', '#8FBCBB', '#ECEFF4']" }
+    - { key: scrollback-unlimited, value: "true" }
+    - { key: scrollbar-policy, value: "'never'" }
+    - { key: use-system-font, value: "false" }
+    - { key: use-theme-background, value: "false" }
+    - { key: use-theme-colors, value: "false" }
+    - { key: use-theme-transparency, value: "false" }
+    - { key: use-transparent-background, value: "true" }
+    - { key: visible-name, value: "'Nord'" }

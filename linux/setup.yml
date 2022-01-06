@@ -1,0 +1,55 @@
+- hosts: workstation
+  tags: always
+  become: true
+  pre_tasks:
+    - name: pre-run | update package cache (apt)
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+      when: has_apt
+
+    - name: pre-run | update package cache (dnf)
+      tags: always
+      dnf: update_cache=yes
+      changed_when: False
+      when: has_dnf
+
+    - name: pre-run | update package cache (pacman)
+      tags: always
+      pacman: update_cache=yes
+      changed_when: False
+      when: has_pacman
+
+- hosts: workstation
+  roles:
+    - workstation
+
+- hosts: workstation
+  become: true
+  tasks:
+    - name: cleanup package cache (apt)
+      tags: always
+      apt:
+        autoclean: yes
+      changed_when: false
+      when: has_apt
+
+    - name: autoremove orphan packages (apt)
+      tags: always
+      apt:
+        autoremove: yes
+        purge: yes
+      when: has_apt
+
+    - name: autoremove orphan packages (dnf)
+      tags: always
+      dnf:
+        autoremove: yes
+        purge: yes
+      when: has_dnf
+
+    - name: autoremove orphan packages (pacman)
+      tags: always
+      command: "pacman -Qdtq | pacman -Rs -"
+      changed_when: False
+      when: has_pacman

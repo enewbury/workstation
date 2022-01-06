@@ -1,0 +1,18 @@
+gnome_extension_ids:
+  - 615
+  - 3193
+  - 779
+  - 7
+  - 906
+  - 28
+
+nf_user: "{{ ansible_user_id }}"
+nf_group: "{{ ansible_user_id }}"
+nf_github_raw_patched_fonts: https://github.com/haasosaurus/nerd-fonts/raw/regen-mono-font-fix/patched-fonts
+nf_single_fonts:
+  - "FiraCode/Bold/complete/Fura Code Bold Nerd Font Complete Mono.ttf"
+  - "FiraCode/Light/complete/Fura Code Light Nerd Font Complete Mono.ttf"
+  - "FiraCode/Medium/complete/Fura Code Medium Nerd Font Complete Mono.ttf"
+  - "FiraCode/Regular/complete/Fura Code Regular Nerd Font Complete Mono.ttf"
+  - "FiraCode/Retina/complete/Fura Code Retina Nerd Font Complete Mono.ttf"
+

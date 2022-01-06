@@ -1,0 +1,7 @@
+---
+has_apt: "{{ ansible_facts.os_family == 'Debian' }}"
+has_dnf: "{{ ansible_facts.os_family == 'RedHat' }}"
+has_pacman: "{{ ansible_facts.os_family == 'Archlinux' }}"
+dotfiles_dir: "~/src/github.com/enewbury/dotfiles"
+gui_editor: gedit
+terminal_emulator: gnome-terminal
