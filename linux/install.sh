@@ -7,7 +7,7 @@ unzip /tmp/op.zip
 gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 gpg --verify /tmp/$VERSTION/op.sig /tmp/$VERSION/op
 
-mv /tmp$VERSION/op /usr/local/bin/
+mv /tmp/$VERSION/op /usr/local/bin/
 
 rm -rf /tmp/$VERSION
 rm /tmp/op.zip
