@@ -1,2 +1,4 @@
 wireguard_name: wireguard-tools
 python_pip_package: python-pip
+ssl_dev_package: openssl-devel
+ncurses_package: ncurses-devel

@@ -14,8 +14,6 @@
       - fish
       - htop
       - jq
-      - libncurses5-dev
-      - libssl-dev
       - neofetch
       - "{{ python_pip_package }}"
       - rcm
@@ -26,16 +24,7 @@
   tags: packages,system,settings
   pip:
     name:
-      - psutil 
-- name: utilities | check starship
-  stat:
-    path: "/usr/local/bin/starship"
-  register: starship_command
-
-- name: utilities | install starship
-  tags: packages,system,starship
-  command: sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-  when: not starship_command.stat.exists
+      - psutil
 
 - name: utilities | install man-pages (arch)
   tags: packages,system,settings

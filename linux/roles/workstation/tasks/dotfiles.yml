@@ -5,6 +5,7 @@
     state: present
     line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
     regexp: "^github\\.com"
+    mode: 0600
 
 - name: dotfiles | clone dotfiles
   git:
@@ -19,6 +20,22 @@
     dest: ~/.tmux/plugins/tpm
     depth: 1
     version: v3.0.0
+
+- name: dotfiles | install starship
+  package:
+    present: yes
+    name: starship
+
+- name: dotfiles | check starship (debain)
+  stat:
+    path: "/usr/local/bin/starship"
+  register: starship_command
+  when: has_apt
+
+- name: dotfiles | install starship (debian)
+  tags: packages,system,starship
+  command: sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+  when: has_apt and not starship_command.stat.exists
 
 - name: dotfiles | lookup local fish config
   onepassword_info:

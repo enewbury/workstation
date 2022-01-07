@@ -6,7 +6,7 @@
     version: v0.8.1
 
 - name: adsf | ensure completions dir exists
-  file: path=~/.config/fish/completions state=directory
+  file: path=~/.config/fish/completions state=directory mode=0755
 
 - name: Create a symbolic link
   file:
@@ -36,6 +36,14 @@
 - name: add asdf plugin nodejs
   command: ~/.asdf/bin/asdf plugin add nodejs
   when: "'nodejs' not in asdf_plugin_out.stdout_lines | list"
+
+- name: Install erlang dependencies
+  package:
+    state: present
+    name:
+      - "{{ ssl_dev_package }}"
+      - "{{ ncurses_package }}"
+  when: !has_pacman
 
 - name: asdf install
   command: ~/.asdf/bin/asdf install
