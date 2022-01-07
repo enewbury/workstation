@@ -49,5 +49,5 @@
 - name: asdf install
   command: asdf install
   environment:
-    - PATH: "~/.asdf/bin:$PATH"
+    PATH: "~/.asdf/bin:{{ ansible.env.PATH }}"
   changed_when: false
