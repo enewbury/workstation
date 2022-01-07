@@ -43,7 +43,7 @@
     name:
       - "{{ ssl_dev_package }}"
       - "{{ ncurses_package }}"
-  when: !has_pacman
+  when: not has_pacman
 
 - name: asdf install
   command: ~/.asdf/bin/asdf install
