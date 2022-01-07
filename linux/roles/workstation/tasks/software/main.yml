@@ -8,10 +8,8 @@
 - name: software | flatpak | add flathub remote
   tags: packages,flatpak
   become: yes
-  flatpak_remote:
-    name: flathub
-    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-    state: present
+  command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  changed_when: false
 
 - name: softare | flatpak | install apps
   tags: packages,flatpak
