@@ -11,14 +11,12 @@
   flatpak_remote:
     name: flathub
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-    method: user
     state: present
 
 - name: softare | flatpak | install apps
   tags: packages,flatpak
   flatpak:
     name: "{{ item }}"
-    method: user
   with_items:
     - org.gimp.GIMP
     - com.spotify.Client
