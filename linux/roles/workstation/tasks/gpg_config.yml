@@ -24,7 +24,8 @@
 
     - name: gpg config | load private key
       onepassword_info:
-        search_terms: "framework_sec.gpg"
+        search_terms:
+          - name: "framework_sec.gpg"
       register: priv_gpg_item
 
     - name: gpg config | fetch private key doc

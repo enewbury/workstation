@@ -40,7 +40,8 @@
 
 - name: dotfiles | lookup local fish config
   onepassword_info:
-    search_terms: "local.fish"
+    search_terms:
+      - name: "local.fish"
   register: local_fish_info
 
 - name: dotfiles | copy local fish config
@@ -51,7 +52,8 @@
 
 - name: dotfiles | lookup local git config
   onepassword_info:
-    search_terms: "gitconfig.local"
+    search_terms:
+      - name: "gitconfig.local"
   register: local_git_info
 
 - name: dotfiles | copy local git config
@@ -62,7 +64,8 @@
 
 - name: dotfiles | lookup hex config
   onepassword_info:
-    search_terms: "hex.config"
+    search_terms:
+      - name: "hex.config"
   register: hex_config_info
 
 - name: dotfiles | ensure hex directory exists
