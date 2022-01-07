@@ -23,7 +23,7 @@
 
 - name: dotfiles | install starship
   package:
-    present: yes
+    state: present
     name: starship
 
 - name: dotfiles | check starship (debain)
