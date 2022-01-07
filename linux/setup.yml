@@ -45,7 +45,6 @@
       tags: always
       dnf:
         autoremove: yes
-        purge: yes
       when: has_dnf
 
     - name: autoremove orphan packages (pacman)
