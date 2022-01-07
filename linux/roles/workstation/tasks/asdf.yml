@@ -47,5 +47,7 @@
   when: not has_pacman
 
 - name: asdf install
-  command: ~/.asdf/bin/asdf install
+  command: asdf install
+  environment:
+    - PATH: "~/.asdf/bin:$PATH"
   changed_when: false
