@@ -38,6 +38,7 @@
   when: "'nodejs' not in asdf_plugin_out.stdout_lines | list"
 
 - name: Install erlang dependencies
+  become: yes
   package:
     state: present
     name:
