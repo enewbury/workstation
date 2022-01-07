@@ -12,7 +12,9 @@ sudo mv /tmp/$VERSION/op /usr/local/bin/
 rm -rf /tmp/$VERSION
 rm /tmp/op.zip
 
-eval(`op signin my.1password.com`)
+echo "Enter 1password username"
+read username
+eval(`op signin my.1password.com $username`)
 
 git clone git@github.com:enewbury/workstation.git ~/src/github.com/enewbury/workstation
 
