@@ -18,8 +18,9 @@ Example on debian
 ```
 sudo apt update
 sudo apt install ansible
-curl https://raw.githubusercontent.com/enewbury/workstation/main/linux/install.sh | bash
+curl https://raw.githubusercontent.com/enewbury/workstation/main/install.sh | bash
 ```
+Note: the above script isn't working exactly out of the box, but next time I run this on a clean install, I'll track down where it's going wrong.
 
 ## Features
 - RCM for dotfiles
