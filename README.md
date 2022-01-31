@@ -1,4 +1,4 @@
-# Workstation setup for Linux and Mac
+# Workstation setup for Linux
 
 This serves as my "Source of Truth" for the configuration of my workstation computers.  I can mess around with them as much as I like, but anything I want to save permanantly goes in this repo.
 
@@ -29,6 +29,3 @@ curl https://raw.githubusercontent.com/enewbury/workstation/main/linux/install.s
 - Setup of terminal themes
 - Custom keyboard shortcuts and gnome settings
 
-
-## Mac
-Includes some legacy bash scripts for setting up Mac OS
