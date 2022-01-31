@@ -12,11 +12,13 @@
       - autoconf
       - curl
       - fish
+      - fzf
       - htop
       - jq
       - neofetch
       - "{{ python_pip_package }}"
       - rcm
+      - ripgrep
       - tmux
       - vim
 

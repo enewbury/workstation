@@ -83,3 +83,20 @@
 - name: dotfiles | setup dotfiles
   command: rcup -d {{ dotfiles_dir  }}
   changed_when: false
+
+- name: dotfiles | make the fisher directory
+  file:
+    path: "{{ user.home }}/.config/fish/functions"
+    state: directory
+    user: "{{ user.name }}"
+    mode: 0755
+    recurse: yes
+
+- name: dotfiles | install fisher
+  get_url:
+    url: https://git.io/fisher
+    dest: "{{ user.home }}/.config/fish/functions/fisher.fish"
+
+- name: dotfiles | install fisher plugins
+  command: fisher update
+
