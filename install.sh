@@ -14,12 +14,12 @@ rm /tmp/op.zip
 
 echo "Enter 1password username"
 read username
-eval(`op signin my.1password.com $username`)
+eval `op signin my.1password.com $username`
 
 git clone https://github.com/enewbury/workstation.git /tmp/workstation
 
-ansible-galaxy -r /tmp/workstation/linux/requirements.yml install
-ansible-playbook -c local -K /tmp/workstation/linux/setup.yml
+ansible-galaxy -r /tmp/workstation/requirements.yml install
+ansible-playbook -c local -K /tmp/workstation/setup.yml
 
 rm -rf /tmp/workstation
 
