@@ -21,27 +21,11 @@
     depth: 1
     version: v3.0.0
 
-- name: dotfiles | install starship
-  become: yes
-  package:
-    state: present
-    name: starship
-
-- name: dotfiles | check starship (debain)
-  stat:
-    path: "/usr/local/bin/starship"
-  register: starship_command
-  when: has_apt
-
-- name: dotfiles | install starship (debian)
-  tags: packages,system,starship
-  command: sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-  when: has_apt and not starship_command.stat.exists
-
 - name: dotfiles | lookup local fish config
   onepassword_info:
     search_terms:
       - name: "local.fish"
+    auto_login: "{{ op_login }}"
   register: local_fish_info
 
 - name: dotfiles | copy local fish config
@@ -54,6 +38,7 @@
   onepassword_info:
     search_terms:
       - name: "gitconfig.local"
+    auto_login: "{{ op_login }}"
   register: local_git_info
 
 - name: dotfiles | copy local git config
@@ -66,6 +51,7 @@
   onepassword_info:
     search_terms:
       - name: "hex.config"
+    auto_login: "{{ op_login }}"
   register: hex_config_info
 
 - name: dotfiles | ensure hex directory exists
@@ -99,4 +85,5 @@
 
 - name: dotfiles | install fisher plugins
   command: fisher update
+  changed_when: false
 

@@ -1,0 +1,17 @@
+- name: shell | save user as fact
+  set_fact:
+    the_user: "{{ ansible_user_id }}"
+
+- name: shell | change user shell to fish (brew)
+  become: true
+  user:
+    name: "{{ the_user }}"
+    shell: /usr/local/bin/fish
+  when: ansible_facts.os_family == "Darwin"
+
+- name: shell | change user shell to fish (linux)
+  become: true
+  user:
+    name: "{{ the_user }}"
+    shell: /usr/bin/fish
+  when: ansible_facts.os_family != "Darwin"

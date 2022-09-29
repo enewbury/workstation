@@ -14,6 +14,7 @@
       onepassword_info:
         search_terms:
           - name: "id_ed25519.pub"
+        auto_login: "{{ op_login }}"
       register: id_ed25519_pub_info
 
     - name: set public key item fact
@@ -38,6 +39,7 @@
       onepassword_info:
         search_terms:
           - name: "id_ed25519"
+        auto_login: "{{ op_login }}"
       register: id_ed25519_info
 
     - name: set private key item fact

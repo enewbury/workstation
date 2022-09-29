@@ -1,2 +1,6 @@
-- src: jaredhocutt.gnome_extensions
-- src: ctorgalson.nerdfonts
+roles:
+  - name: jaredhocutt.gnome_extensions
+  - name: ctorgalson.nerdfonts
+
+collections: 
+  - community.general

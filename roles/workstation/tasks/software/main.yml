@@ -1,36 +1,5 @@
-- name: software | flatpak | add flatpak support
-  tags: packages,flatpak
-  become: yes
-  package:
-    name: flatpak
-    state: present
+- import_tasks: linux.yml
+  when: ansible_facts.os_family != "Darwin"
 
-- name: software | flatpak | add flathub remote
-  tags: packages,flatpak
-  become: yes
-  command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  changed_when: false
-
-- name: softare | flatpak | install apps
-  tags: packages,flatpak
-  flatpak:
-    name: "{{ item }}"
-  with_items:
-    - org.gimp.GIMP
-    - com.spotify.Client
-    - im.riot.Riot
-    - org.gnome.Geary
-    - ch.protonmail.protonmail-bridge
-    - us.zoom.Zoom
-    - com.slack.Slack
-    - com.nextcloud.desktopclient.nextcloud
-    - net.cozic.joplin_desktop
-
-- import_tasks: "1password.yml"
-  tags: packages,1password
-
-- name: software | install packages
-  become: yes
-  package:
-    name:
-      - "{{ wireguard_name }}"
+- import_tasks: mac.yml
+  when: ansible_facts.os_family == "Darwin"

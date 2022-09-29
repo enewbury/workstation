@@ -1,0 +1,52 @@
+- name: utilities | install generic brew packages
+  community.general.homebrew:
+    name: 
+      - rcm
+      - starship
+      - 1password-cli
+      - ghq
+    state: present
+
+- name: utilities | install packages
+  become: true
+  package:
+    state: present
+    name:
+      - automake
+      - autoconf
+      - curl
+      - fish
+      - fzf
+      - jq
+      - neofetch
+      - "{{ python_pip_package }}"
+      - tmux
+      - vim
+      - neovim
+  when: ansible_facts.os_family != "Darwin"
+
+- name: utilities | mac brew packages
+  homebrew:
+    name: 
+      - fish
+      - fzf
+      - jq
+      - neofetch
+      - tmux
+      - vim
+      - neovim
+    state: present
+  when: ansible_facts.os_family == "Darwin"
+
+- name: utilities | install pip packages
+  pip:
+    name:
+      - psutil
+
+- name: utilities | install man-pages (arch)
+  pacman:
+    state: present
+    name:
+      - man-db
+      - man-pages
+  when: has_pacman

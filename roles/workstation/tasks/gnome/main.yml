@@ -1,0 +1,16 @@
+# - block:
+#   - import_tasks: keybindings.yml
+#   tags: keybindings
+
+- block:
+  - import_tasks: peripherals.yml
+  tags: peripherals
+
+- block:
+  - import_tasks: gnome_shell.yml
+  tags: gnome_shell
+
+- name: "gnome | extensions | install extensions"
+  include_role:
+    name: jaredhocutt.gnome_extensions
+  tags: extensions

@@ -1,0 +1,9 @@
+
+- name: theming | copy profile image
+  become: true
+  copy:
+    src: profile_image.jpg
+    dest: /var/lib/AccountsService/icons/eric
+    owner: root
+    group: root
+    mode: 0644

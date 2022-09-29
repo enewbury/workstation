@@ -1,0 +1,20 @@
+- name: Install brew software
+  homebrew:
+    name:
+     - 1password
+     - gimp
+     - spotify
+     - element
+     - protonmail
+     - zoom
+     - slack
+     - nextcloud
+     - obsidian
+     - mas
+    state: present
+
+- name: Install from app store
+  mas:
+    id: 
+    - 1451685025 # Wireguard
+    state: present

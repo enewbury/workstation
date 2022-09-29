@@ -29,16 +29,12 @@
   command: ~/.asdf/bin/asdf plugin add erlang
   when: "'erlang' not in asdf_plugin_out.stdout_lines | list"
 
-- name: add asdf plugin ghq
-  command: ~/.asdf/bin/asdf plugin add ghq
-  when: "'ghq' not in asdf_plugin_out.stdout_lines | list"
-
 - name: add asdf plugin nodejs
   command: ~/.asdf/bin/asdf plugin add nodejs
   when: "'nodejs' not in asdf_plugin_out.stdout_lines | list"
 
 - name: Install erlang dependencies
-  become: yes
+  become: true
   package:
     state: present
     name:

@@ -2,6 +2,7 @@
   onepassword_info:
     search_terms:
       - name: "framework_pub.gpg"
+    auto_login: "{{ op_login }}"
   register: pub_gpg_item
 
 - name: gpg config | fetch key_id
@@ -26,6 +27,7 @@
       onepassword_info:
         search_terms:
           - name: "framework_sec.gpg"
+        auto_login: "{{ op_login }}"
       register: priv_gpg_item
 
     - name: gpg config | fetch private key doc
