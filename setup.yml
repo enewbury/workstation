@@ -26,14 +26,6 @@
       check_mode: true
       changed_when: false
 
-    - name: pre-run | load 1password credentials
-      set_fact:
-        op_login:
-          master_password: "{{ op_master_password }}"
-          secret_key: "{{ op_secret_key }}"
-          subdomain: my
-          username: "{{ op_username }}"
-
 - hosts: workstation
   roles:
     - workstation

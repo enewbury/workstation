@@ -12,7 +12,7 @@
     repo: git@github.com:enewbury/dotfiles.git
     dest: "{{ dotfiles_dir }}"
     update: false
-    version: "latest"
+    version: "main"
 
 - name: dotfiles | clone tpm
   git:
@@ -21,50 +21,62 @@
     depth: 1
     version: v3.0.0
 
-- name: dotfiles | lookup local fish config
-  onepassword_info:
-    search_terms:
-      - name: "local.fish"
-    auto_login: "{{ op_login }}"
-  register: local_fish_info
+- name: dotfiles | check for local fish file
+  stat:
+    path: ~/.local/local.fish
+  register: local_fish_file
 
-- name: dotfiles | copy local fish config
-  copy:
-    content: "{{ local_fish_info['onepassword']['local.fish']['document'] }}"
-    dest: ~/.local/local.fish
-    mode: 0644
+- block:
+    - name: dotfiles | lookup local fish config
+      command: op document get "local.fish"
+      register: local_fish
 
-- name: dotfiles | lookup local git config
-  onepassword_info:
-    search_terms:
-      - name: "gitconfig.local"
-    auto_login: "{{ op_login }}"
-  register: local_git_info
+    - name: dotfiles | copy local fish config
+      copy:
+        content: "{{ local_fish.stdout }}"
+        dest: ~/.local/local.fish
+        mode: 0644
+  when: not local_fish_file.stat.exists
 
-- name: dotfiles | copy local git config
-  copy:
-    content: "{{ local_git_info['onepassword']['gitconfig.local']['document'] }}"
-    dest: ~/.local/gitconfig
-    mode: 0644
+- name: dotfiles | check for local gitconfig
+  stat:
+    path: ~/.local/gitconfig
+  register: local_gitconfig_file
 
-- name: dotfiles | lookup hex config
-  onepassword_info:
-    search_terms:
-      - name: "hex.config"
-    auto_login: "{{ op_login }}"
-  register: hex_config_info
+- block:
+    - name: dotfiles | lookup local git config
+      command: op document get "gitconfig.local"
+      register: local_gitconfig
 
-- name: dotfiles | ensure hex directory exists
-  file:
-    path: ~/.hex
-    state: directory
-    mode: 0755
+    - name: dotfiles | copy local git config
+      copy:
+        content: "{{ local_gitconfig.stdout }}"
+        dest: ~/.local/gitconfig
+        mode: 0644
+  when: not local_gitconfig_file.stat.exists
 
-- name: dotfiles | copy hex config
-  copy:
-    content: "{{ hex_config_info['onepassword']['hex.config']['document'] }}"
-    dest: ~/.hex/hex.config
-    mode: 0644
+- name: dotfiles | check for local hex config
+  stat:
+    path: ~/.hex/hex.config
+  register: local_hex_file
+
+- block:
+    - name: dotfiles | lookup hex config
+      command: op document get "hex.config"
+      register: hex_config
+
+    - name: dotfiles | ensure hex directory exists
+      file:
+        path: ~/.hex
+        state: directory
+        mode: 0755
+
+    - name: dotfiles | copy hex config
+      copy:
+        content: "{{ hex_config.stdout }}"
+        dest: ~/.hex/hex.config
+        mode: 0644
+  when: not local_hex_file.stat.exists
 
 - name: dotfiles | setup dotfiles
   command: rcup -d {{ dotfiles_dir  }}
@@ -72,18 +84,16 @@
 
 - name: dotfiles | make the fisher directory
   file:
-    path: "{{ user.home }}/.config/fish/functions"
+    path: "~/.config/fish/functions"
     state: directory
-    user: "{{ user.name }}"
     mode: 0755
     recurse: yes
 
 - name: dotfiles | install fisher
   get_url:
     url: https://git.io/fisher
-    dest: "{{ user.home }}/.config/fish/functions/fisher.fish"
+    dest: "~/.config/fish/functions/fisher.fish"
 
 - name: dotfiles | install fisher plugins
-  command: fisher update
+  command: fish -c "fisher update"
   changed_when: false
-

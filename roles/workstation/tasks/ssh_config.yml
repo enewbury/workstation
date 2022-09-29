@@ -11,22 +11,14 @@
 
 - block:
     - name: ssh config | lookup public key from 1password
-      onepassword_info:
-        search_terms:
-          - name: "id_ed25519.pub"
-        auto_login: "{{ op_login }}"
-      register: id_ed25519_pub_info
-
-    - name: set public key item fact
-      set_fact:
-        pub_item: "{{ id_ed25519_pub_info['onepassword']['id_ed25519.pub'] }}"
+      command: op document get "id_ed25519.pub"
+      register: id_ed25519_pub
 
     - name: ssh config | copy public key
       copy:
-        content: "{{ pub_item['document'] }}\n"
+        content: "{{ id_ed25519_pub.stdout }}"
         dest: ~/.ssh/id_ed25519.pub
         mode: 0644
-
   when: not id_ed25519_pub_stat.stat.exists
 
 - name: ssh config | check for private key file
@@ -36,19 +28,12 @@
 
 - block:
     - name: ssh config | lookup private key from 1password
-      onepassword_info:
-        search_terms:
-          - name: "id_ed25519"
-        auto_login: "{{ op_login }}"
-      register: id_ed25519_info
-
-    - name: set private key item fact
-      set_fact:
-        priv_item: "{{ id_ed25519_info['onepassword']['id_ed25519'] }}"
+      command: op document get "id_ed25519"
+      register: id_ed25519
 
     - name: ssh config | copy public key
       copy:
-        content: "{{ priv_item['document'] }}\n"
+        content: "{{ id_ed25519.stdout }}\n"
         dest: ~/.ssh/id_ed25519
         mode: 0600
 

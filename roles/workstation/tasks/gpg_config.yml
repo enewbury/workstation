@@ -1,42 +1,29 @@
-- name: gpg config | lookup public key item
-  onepassword_info:
-    search_terms:
-      - name: "framework_pub.gpg"
-    auto_login: "{{ op_login }}"
-  register: pub_gpg_item
-
-- name: gpg config | fetch key_id
-  set_fact:
-    gpg_key_id: "{{ lookup('onepassword', 'framework_pub.gpg', field='key_id') }}"
-
-- name: gpg config | fetch public key doc
-  set_fact:
-    gpg_pub_doc: "{{ pub_gpg_item['onepassword']['framework_pub.gpg']['document'] }}"
+- name: gpg config | lookup public key key_id
+  command: op item get "framework_pub.gpg" --fields label=key_id
+  register: gpg_key_id
+  changed_when: false
 
 - name: gpg config | check if key exists
-  command: gpg --list-secret-keys {{ gpg_key_id }}
+  command: gpg --list-secret-keys {{ gpg_key_id.stdout_lines[0] }}
   register: gpg_key_list
   failed_when: false
   changed_when: false
 
 - block:
+    - name: gpg config | lookup public key document
+      command: op document get "framework_pub.gpg"
+      register: gpg_pub_doc
+
     - name: gpg config | import public key
-      shell: echo "{{ gpg_pub_doc }}" | gpg --import
+      shell: echo "{{ gpg_pub_doc.stdout }}" | gpg --import
 
     - name: gpg config | load private key
-      onepassword_info:
-        search_terms:
-          - name: "framework_sec.gpg"
-        auto_login: "{{ op_login }}"
-      register: priv_gpg_item
-
-    - name: gpg config | fetch private key doc
-      set_fact:
-        gpg_sec_doc: "{{ priv_gpg_item['onepassword']['framework_sec.gpg']['document'] }}"
+      command: op document get "framework_sec.gpg"
+      register: gpg_sec_doc
 
     - name: gpg config | import private key
-      shell: echo "{{ gpg_sec_doc }}" | gpg --allow-secret-key-import --import
+      shell: echo "{{ gpg_sec_doc.stdout }}" | gpg --allow-secret-key-import --import
 
     - name: gpg_config | set trust to ultimate
-      shell: echo "{{ gpg_key_id }}:6" | gpg --import-ownertrust
+      shell: echo "{{ gpg_key_id.stdout_lines[0] }}:6" | gpg --import-ownertrust
   when: gpg_key_list.rc != 0
