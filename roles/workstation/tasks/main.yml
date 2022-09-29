@@ -3,6 +3,10 @@
   tags: always
 
 - block:
+  - import_tasks: repositories/main.yml
+  tags: repositories
+
+- block:
   - import_tasks: utilities.yml
   tags: utilities
 

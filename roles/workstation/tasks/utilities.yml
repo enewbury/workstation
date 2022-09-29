@@ -3,7 +3,6 @@
     name: 
       - rcm
       - starship
-      - 1password-cli
       - ghq
     state: present
 
@@ -12,6 +11,7 @@
   package:
     state: present
     name:
+      - 1password-cli
       - automake
       - autoconf
       - curl
@@ -28,6 +28,7 @@
 - name: utilities | mac brew packages
   homebrew:
     name: 
+      - 1password-cli
       - fish
       - fzf
       - jq

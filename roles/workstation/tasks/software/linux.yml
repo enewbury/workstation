@@ -22,10 +22,9 @@
     - com.nextcloud.desktopclient.nextcloud
     - md.obsidian.Obsidian
 
-- import_tasks: "1password.yml"
-
 - name: software | install packages
   become: yes
   package:
     name:
       - "{{ wireguard_name }}"
+      - 1password

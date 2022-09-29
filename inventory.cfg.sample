@@ -1,4 +1,5 @@
 [workstation]
 localhost
 
+[workstation:vars]
 # Add 1password details
