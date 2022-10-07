@@ -18,6 +18,9 @@
       - fish
       - fzf
       - jq
+      - libstdc++-static
+      - gcc-c++
+      - ripgrep
       - neofetch
       - "{{ python_pip_package }}"
       - tmux
@@ -33,6 +36,7 @@
       - fzf
       - jq
       - neofetch
+      - ripgrep
       - tmux
       - vim
       - neovim

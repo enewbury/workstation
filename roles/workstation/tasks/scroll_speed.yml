@@ -1,0 +1,50 @@
+
+- name: scroll_speed | install build deps
+  become: true
+  package:
+    state: present
+    name:
+      - meson
+      - cmake
+      - libinput-devel
+      - libudev-devel
+
+- name: scroll_speed | clone libinput-config
+  git:
+    repo: https://gitlab.com/lukaskruedel/libinput-config.git
+    dest: /tmp/libinput-config
+    depth: 1
+
+- name: scroll_speed | meson build
+  command: meson build
+  args:
+    chdir: /tmp/libinput-config
+
+- name: scroll_speed | meson compile
+  command: meson compile
+  args:
+    chdir: /tmp/libinput-config/build
+
+- name: scroll_speed | meson install
+  become: true
+  command: meson install
+  args:
+    chdir: /tmp/libinput-config/build
+
+- name: scroll_speed | add config
+  become: true
+  copy:
+    dest: "/etc/libinput.conf"
+    content: |
+      scroll-factor=.2
+
+# - name: scroll_speed | remove build deps
+#   become: true
+#   package:
+#     state: absent
+#     name:
+#       - meson
+#       - cmake
+#       - libinput-devel
+#       - libudev-devel
+

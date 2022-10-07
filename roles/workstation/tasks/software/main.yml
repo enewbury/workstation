@@ -3,3 +3,16 @@
 
 - import_tasks: mac.yml
   when: ansible_facts.os_family == "Darwin"
+
+- name: software | fetch lunarvim installer
+  ansible.builtin.uri:
+    url: https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh 
+    return_content: yes
+  register: lunarvim_installer
+
+- name: software | Run lunarvim installer
+  ansible.builtin.shell:
+    cmd: sh -s -- -y
+    stdin: "{{ lunarvim_installer.content }}"
+
+

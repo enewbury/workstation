@@ -31,6 +31,10 @@
   tags: asdf
 
 - block:
+  - import_tasks: scroll_speed.yml
+  tags: scroll_speed
+
+- block:
   - import_tasks: software/main.yml
   tags: software
 

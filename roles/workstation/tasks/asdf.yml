@@ -33,6 +33,10 @@
   command: ~/.asdf/bin/asdf plugin add nodejs
   when: "'nodejs' not in asdf_plugin_out.stdout_lines | list"
 
+- name: add asdf plugin rust
+  command: ~/.asdf/bin/asdf plugin add rust
+  when: "'rust' not in asdf_plugin_out.stdout_lines | list"
+
 - name: Install erlang dependencies
   become: true
   package:
