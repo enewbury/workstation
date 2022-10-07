@@ -17,3 +17,13 @@
   dconf:
     key: "/org/gnome/desktop/peripherals/keyboard/delay"
     value: "uint32 319"
+
+- name: gnome | peripherals | natural mouse scroll
+  dconf:
+    key: "/org/gnome/desktop/peripherals/mouse/natural-scroll"
+    value: "true"
+
+- name: gnome | peripherals | natural touchpad scroll
+  dconf:
+    key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
+    value: "true"
