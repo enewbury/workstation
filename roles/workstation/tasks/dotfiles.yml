@@ -21,6 +21,12 @@
     depth: 1
     version: v3.0.0
 
+- name: dotfiles | ensure .local directory exists
+  file:
+    path: ~/.local
+    state: directory
+    mode: 0700
+
 - name: dotfiles | check for local fish file
   stat:
     path: ~/.local/local.fish

@@ -32,6 +32,7 @@
 
 - block:
   - import_tasks: scroll_speed.yml
+  when: ansible_facts.os_family != "Darwin"
   tags: scroll_speed
 
 - block:

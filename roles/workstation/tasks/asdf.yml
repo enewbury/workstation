@@ -44,7 +44,7 @@
     name:
       - "{{ ssl_dev_package }}"
       - "{{ ncurses_package }}"
-  when: not has_pacman
+  when: not has_pacman and ansible_facts.os_family != "Darwin"
 
 - name: asdf install
   command: ~/.asdf/bin/asdf install
