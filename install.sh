@@ -29,7 +29,7 @@ fi
 
 eval $(op signin)
 
-if [[ $(uname) == "Darwin" ]]; then
+if [[ $(uname) != "Darwin" ]]; then
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/parallels/.bash_profile
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
