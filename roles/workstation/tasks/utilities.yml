@@ -31,7 +31,6 @@
 - name: utilities | mac brew packages
   homebrew:
     name: 
-      - 1password-cli
       - fish
       - fzf
       - jq
