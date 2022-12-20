@@ -12,7 +12,7 @@
 
 - name: software | Run lunarvim installer
   ansible.builtin.shell:
-    cmd: sh -s -- -y
+    cmd: sh -s -- -n
     stdin: "{{ lunarvim_installer.content }}"
 
 
