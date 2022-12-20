@@ -22,7 +22,7 @@
       register: gpg_sec_doc
 
     - name: gpg config | import private key
-      shell: echo "{{ gpg_sec_doc.stdout }}" | gpg --allow-secret-key-import --import
+      shell: echo "{{ gpg_sec_doc.stdout }}" | gpg --allow-secret-key-import --import --batch
 
     - name: gpg_config | set trust to ultimate
       shell: echo "{{ gpg_key_id.stdout_lines[0] }}:6" | gpg --import-ownertrust
