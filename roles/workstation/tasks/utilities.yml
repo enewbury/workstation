@@ -33,6 +33,7 @@
     name: 
       - fish
       - fzf
+      - gpg
       - jq
       - mas
       - pinentry-mac
