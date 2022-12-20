@@ -6,7 +6,7 @@
   become: true
   user:
     name: "{{ the_user }}"
-    shell: /usr/local/bin/fish
+    shell: /opt/homebrew/bin/fish
   when: ansible_facts.os_family == "Darwin"
 
 - name: shell | change user shell to fish (linux)

@@ -1,5 +1,5 @@
 - name: gpg config | lookup public key key_id
-  command: op item get "framework_pub.gpg" --fields label=key_id
+  command: op item get "public.gpg" --fields label=key_id
   register: gpg_key_id
   changed_when: false
 
@@ -11,14 +11,14 @@
 
 - block:
     - name: gpg config | lookup public key document
-      command: op document get "framework_pub.gpg"
+      command: op document get "public.gpg"
       register: gpg_pub_doc
 
     - name: gpg config | import public key
       shell: echo "{{ gpg_pub_doc.stdout }}" | gpg --import
 
     - name: gpg config | load private key
-      command: op document get "framework_sec.gpg"
+      command: op document get "private.gpg"
       register: gpg_sec_doc
 
     - name: gpg config | import private key
