@@ -35,6 +35,7 @@
       - fzf
       - jq
       - mas
+      - pinentry-mac
       - neofetch
       - ripgrep
       - tmux
