@@ -2,11 +2,13 @@
   homebrew_cask:
     name:
      - 1password
+     - alacritty
      - gimp
      - spotify
      - element
      - protonmail-bridge
      - zoom
+     - rectangle
      - slack
      - nextcloud
      - obsidian
