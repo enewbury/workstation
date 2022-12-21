@@ -26,4 +26,19 @@
 
     - name: gpg_config | set trust to ultimate
       shell: echo "{{ gpg_key_id.stdout_lines[0] }}:6" | gpg --import-ownertrust
+
+
+    - block:
+      - name: gpg config | add gpg-agent.conf
+        shell: echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" > ~/.gnupg/gpg-agent.conf
+
+      - name: gpg config | update gpg.conf
+        copy:
+          dest: ~/.gnupg/gpg.conf
+          content: use-agent
+
+      - name: gpg config | restart agent
+        command: killall gpg-agent
+
+      when: ansible_facts.os_family == "Darwin"
   when: gpg_key_list.rc != 0
