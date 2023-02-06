@@ -8,7 +8,7 @@
      - protonmail-bridge
      # - zoom
      - rectangle
-     - slack
+     # - slack
      - nextcloud
      - obsidian
     state: present
