@@ -9,7 +9,7 @@
 
 - name: dotfiles | clone dotfiles
   git:
-    repo: git@github.com:enewbury/dotfiles.git
+    repo: https://github.com/enewbury/dotfiles.git
     dest: "{{ dotfiles_dir }}"
     update: false
     version: "main"
