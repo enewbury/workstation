@@ -1,7 +1,6 @@
 - name: Install brew software
   homebrew_cask:
     name:
-     - 1password
      - alacritty
      - gimp
      - spotify
