@@ -14,8 +14,8 @@
      - obsidian
     state: present
 
-- name: Install from app store
-  mas:
-    id: 
-    - 1451685025 # Wireguard
-    state: present
+# - name: Install from app store
+#   mas:
+#     id: 
+#     - 1451685025 # Wireguard
+#     state: present

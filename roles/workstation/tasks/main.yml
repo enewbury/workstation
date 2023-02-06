@@ -14,13 +14,13 @@
   - import_tasks: shell.yml
   tags: shell
 
-- block:
-  - import_tasks: ssh_config.yml
-  tags: ssh
+# - block:
+#   - import_tasks: ssh_config.yml
+#   tags: ssh
 
-- block:
-  - import_tasks: gpg_config.yml
-  tags: gpg
+# - block:
+#   - import_tasks: gpg_config.yml
+#   tags: gpg
 
 - block:
   - import_tasks: dotfiles.yml
