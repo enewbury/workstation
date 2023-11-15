@@ -5,8 +5,6 @@
      - rectangle
     state: present
 
-#     state: present
-#
 - name: Install personal brew software
   homebrew_cask:
     name:
@@ -17,3 +15,4 @@
       - zoom
       - slack
       - nextcloud
+  when: installation == "personal"
