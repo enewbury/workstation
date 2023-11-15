@@ -2,19 +2,18 @@
   homebrew_cask:
     name:
      - alacritty
-     - gimp
-     - spotify
-     - element
-     - protonmail-bridge
-     # - zoom
      - rectangle
-     # - slack
-     - nextcloud
-     - obsidian
     state: present
 
-# - name: Install from app store
-#   mas:
-#     id: 
-#     - 1451685025 # Wireguard
 #     state: present
+#
+- name: Install personal brew software
+  homebrew_cask:
+    name:
+      - gimp
+      - spotify
+      - element
+      - protonmail-bridge
+      - zoom
+      - slack
+      - nextcloud

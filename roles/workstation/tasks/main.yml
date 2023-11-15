@@ -14,13 +14,15 @@
   - import_tasks: shell.yml
   tags: shell
 
-# - block:
-#   - import_tasks: ssh_config.yml
-#   tags: ssh
+- block:
+  - import_tasks: ssh_config.yml
+  when: installation == "personal"
+  tags: ssh
 
-# - block:
-#   - import_tasks: gpg_config.yml
-#   tags: gpg
+- block:
+  - import_tasks: gpg_config.yml
+  when: installation == "personal"
+  tags: gpg
 
 - block:
   - import_tasks: dotfiles.yml
@@ -30,10 +32,10 @@
   - import_tasks: asdf.yml
   tags: asdf
 
-- block:
-  - import_tasks: scroll_speed.yml
-  when: ansible_facts.os_family != "Darwin"
-  tags: scroll_speed
+# - block:
+#   - import_tasks: scroll_speed.yml
+#   when: ansible_facts.os_family != "Darwin"
+#   tags: scroll_speed
 
 - block:
   - import_tasks: software/main.yml
@@ -48,7 +50,7 @@
   when: ansible_facts.os_family != "Darwin"
   tags: gnome
 
-- name: "fonts | install nerd fonts"
-  tags: fonts
-  include_role:
-    name: ctorgalson.nerdfonts
+# - name: "fonts | install nerd fonts"
+#   tags: fonts
+#   include_role:
+#     name: ctorgalson.nerdfonts
