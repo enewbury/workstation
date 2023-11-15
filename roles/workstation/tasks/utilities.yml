@@ -42,6 +42,7 @@
       - tmux
       - vim
       - neovim
+      - python-psutil
     state: present
   when: ansible_facts.os_family == "Darwin"
 
@@ -49,6 +50,7 @@
   pip:
     name:
       - psutil
+  when: ansible_facts.os_family != "Darwin"
 
 - name: utilities | install man-pages (arch)
   pacman:
