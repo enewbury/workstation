@@ -1,0 +1,24 @@
+- name: fonts | register fonts directory
+  set_fact:
+    fonts_dir: ~/Library/Fonts
+  when: ansible_facts.os_family == "Darwin"
+
+- name: fonts | register foets directory (linux)
+  set_fact:
+    fonts_dir: ~/.local/share/fonts
+  when: ansible_facts.os_family != "Darwin"
+
+- name: fonts | ensure fonts dir exists
+  file: path={{ fonts_dir }} state=directory mode=0755
+
+- name: fonts | check for Fira Code
+  stat:
+    path: "{{fonts_dir}}/FiraCode"
+  register: fira_dir
+
+- name: fonts | Download Fira Code
+  when: not fira_dir.stat.exists
+  unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+    dest: "{{ fonts_dir }}"
+    remote_src: yes

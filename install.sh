@@ -42,5 +42,4 @@ echo "Cloning playbook..."
 git clone https://github.com/enewbury/workstation.git /tmp/workstation
 
 cd /tmp/workstation
-ansible-galaxy install -r requirements.yml
 ansible-playbook -c local -K setup.yml

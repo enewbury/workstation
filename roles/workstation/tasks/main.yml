@@ -31,11 +31,6 @@
   tags: asdf
 
 - block:
-  - import_tasks: scroll_speed.yml
-  when: ansible_facts.os_family != "Darwin"
-  tags: scroll_speed
-
-- block:
   - import_tasks: software/main.yml
   tags: software
 
@@ -48,7 +43,6 @@
   when: ansible_facts.os_family != "Darwin"
   tags: gnome
 
-- name: "fonts | install nerd fonts"
+- block:
+  - import_tasks: fonts.yml
   tags: fonts
-  include_role:
-    name: ctorgalson.nerdfonts

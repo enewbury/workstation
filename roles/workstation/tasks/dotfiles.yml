@@ -86,6 +86,8 @@
 
 - name: dotfiles | setup dotfiles
   command: rcup -d {{ dotfiles_dir  }}
+  environment:
+    RCRC: "{{ dotfiles_dir }}/rcrc"
   changed_when: false
 
 - name: dotfiles | make the fisher directory

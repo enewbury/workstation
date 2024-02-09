@@ -10,7 +10,3 @@
   - import_tasks: gnome_shell.yml
   tags: gnome_shell
 
-- name: "gnome | extensions | install extensions"
-  include_role:
-    name: jaredhocutt.gnome_extensions
-  tags: extensions

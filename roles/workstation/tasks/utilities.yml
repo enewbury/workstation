@@ -1,11 +1,3 @@
-- name: utilities | install generic brew packages
-  community.general.homebrew:
-    name: 
-      - rcm
-      - starship
-      - ghq
-    state: present
-
 - name: utilities | install packages
   become: true
   package:
@@ -26,6 +18,9 @@
       - tmux
       - vim
       - neovim
+      - starship
+      - rcm
+      - ghq
   when: ansible_facts.os_family != "Darwin"
 
 - name: utilities | mac brew packages
@@ -42,6 +37,9 @@
       - tmux
       - vim
       - neovim
+      - rcm
+      - starship
+      - ghq
     state: present
   when: ansible_facts.os_family == "Darwin"
 

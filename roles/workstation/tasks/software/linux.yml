@@ -15,16 +15,11 @@
   with_items:
     - org.gimp.GIMP
     - com.spotify.Client
-    - im.riot.Riot
-    - org.gnome.Geary
-    - us.zoom.Zoom
     - com.slack.Slack
     - com.nextcloud.desktopclient.nextcloud
-    - md.obsidian.Obsidian
 
 - name: software | install packages
   become: yes
   package:
     name:
-      - "{{ wireguard_name }}"
-      - 1password
+      - alacritty
