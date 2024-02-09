@@ -25,6 +25,7 @@
         update_homebrew: true
       check_mode: true
       changed_when: false
+      when: ansible_facts.os_family == Darwin
 
 - hosts: workstation
   roles:
