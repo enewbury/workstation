@@ -18,9 +18,7 @@
       - tmux
       - vim
       - neovim
-      - starship
       - rcm
-      - ghq
   when: ansible_facts.os_family != "Darwin"
 
 - name: utilities | mac brew packages
